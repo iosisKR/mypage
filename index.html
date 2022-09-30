@@ -56,8 +56,15 @@
 
       divClock.innerText = msg;
 
-      if (currentDate.getMinutes()>58) {    //정각 1분전부터 빨강색으로 출력
+      if (currentDate.getHours()>23 && currentDate.getMinutes()>58 && currentDate.getSeconds()>58) {    //정각 1분전부터 빨강색으로 출력
+        divClock.style.color="black";
+      }else if(currentDate.getMinutes()>58){
         divClock.style.color="red";
+      } else if (currentDate.getSeconds()>58){
+        divClock.style.color="blue";
+      } else if (currentDate.getMinutes()>0 || currentDate.getSeconds()>0)
+      {
+        divClock.style.color="green";
       }
       setTimeout(showClock,1000);  //1초마다 갱신
     }
@@ -67,7 +74,34 @@
 </head>
 <body>
 
+  <style>
+    #client-ip {
+      color: #ff80ab;
+    }
+  </style>
   
+  <div style ="font-size:15px";>IP : <span id="client-ip"></span></div>
+  <t>test</t>
+  
+  <script>
+    // HTML의 <script> 요소를 생성한다
+    const se = document.createElement('script');
+    // <script> 요소의 src 속성을 설정한다
+    se.src = 'https://ipinfo.io?callback=callback';
+    // <body> 요소의 하위 끝에 붙인다
+    // 그리고 콜백 함수를 호출한다
+    document.body.appendChild(se);
+    // 앞서 생성한 <script> 요소를 제거한다
+    document.body.removeChild(se);
+  
+    // 콜백 함수가 호출된다
+    function callback(data) {
+      document.getElementById('client-ip').textContent = data.ip;
+    }
+  </script>
+  
+
+
     <h1 style= "
     font-size:50px;
     font-weight:bolder; color:rgb(255, 255, 255); 
@@ -100,7 +134,9 @@
     
     <img src="images/test.png" alt="공사중  나중에 오세요" loading="lazy">
 
-    <iframe width="640" height="360" src="https://www.youtube.com/embed/L2LB12IxLDU" title="테스트영상입니다!~" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/L2LB12IxLDU" title="테스트영상입니다!~" 
+    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+  </iframe>
 
 
     <hr>
